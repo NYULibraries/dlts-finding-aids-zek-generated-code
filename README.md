@@ -3,9 +3,10 @@ This generated Go code is useful for analysis of the structural characteristics 
 Zek creates code that is capable of parsing every single EAD file in the set it was given.
 All possible structural variations in the set of EAD files are accommodated by the resulting Go code.
 
-published-finding-aids-ead-files.go is generated from https://github.com/NYULibraries/findingaids_eads.
+[published-finding-aids-ead-files.go](published-finding-aids-ead-files.go)
+is generated from https://github.com/NYULibraries/findingaids_eads.
 
-sample-set-1-ead-files.go is generated from https://github.com/NYULibraries/dlts-finding-aids-ead-sample-set-1.
+[sample-set-1-ead-files.go](sample-set-1-ead-files.go) is generated from https://github.com/NYULibraries/dlts-finding-aids-ead-sample-set-1.
 
 To refresh the *.go files:
 
