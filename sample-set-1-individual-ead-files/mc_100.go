@@ -76,9 +76,18 @@ type Ead struct {
 				Text     string `xml:",chardata"`
 				Corpname string `xml:"corpname"`
 			} `xml:"repository"`
-			Unittitle string `xml:"unittitle"`
-			Unitid    string `xml:"unitid"`
-			Physdesc  struct {
+			Unittitle   string `xml:"unittitle"`
+			Origination struct {
+				Text     string `xml:",chardata"`
+				Label    string `xml:"label,attr"`
+				Persname struct {
+					Text   string `xml:",chardata"`
+					Rules  string `xml:"rules,attr"`
+					Source string `xml:"source,attr"`
+				} `xml:"persname"`
+			} `xml:"origination"`
+			Unitid   string `xml:"unitid"`
+			Physdesc struct {
 				Text      string `xml:",chardata"`
 				Altrender string `xml:"altrender,attr"`
 				Extent    []struct {
@@ -168,6 +177,15 @@ type Ead struct {
 				Text   string `xml:",chardata"`
 				Source string `xml:"source,attr"`
 			} `xml:"genreform"`
+			Persname struct {
+				Text   string `xml:",chardata"`
+				Source string `xml:"source,attr"`
+			} `xml:"persname"`
+			Corpname struct {
+				Text   string `xml:",chardata"`
+				Rules  string `xml:"rules,attr"`
+				Source string `xml:"source,attr"`
+			} `xml:"corpname"`
 		} `xml:"controlaccess"`
 		Dsc struct {
 			Text string `xml:",chardata"`

@@ -2,7 +2,7 @@ type Ead struct {
 	XMLName        xml.Name `xml:"ead"`
 	Text           string   `xml:",chardata"`
 	Xmlns          string   `xml:"xmlns,attr"`
-	Ns2            string   `xml:"ns2,attr"`
+	Xlink          string   `xml:"xlink,attr"`
 	Xsi            string   `xml:"xsi,attr"`
 	SchemaLocation string   `xml:"schemaLocation,attr"`
 	Eadheader      struct {
@@ -128,13 +128,11 @@ type Ead struct {
 					Unittitle string `xml:"unittitle"`
 					Unitid    struct {
 						Text       string `xml:",chardata"`
-						Audience   string `xml:"audience,attr"`
 						Identifier string `xml:"identifier,attr"`
 						Type       string `xml:"type,attr"`
 					} `xml:"unitid"`
 					Origination []struct {
 						Text     string `xml:",chardata"`
-						Audience string `xml:"audience,attr"`
 						Label    string `xml:"label,attr"`
 						Corpname struct {
 							Text           string `xml:",chardata"`
@@ -185,13 +183,11 @@ type Ead struct {
 						Unittitle string `xml:"unittitle"`
 						Unitid    struct {
 							Text       string `xml:",chardata"`
-							Audience   string `xml:"audience,attr"`
 							Identifier string `xml:"identifier,attr"`
 							Type       string `xml:"type,attr"`
 						} `xml:"unitid"`
 						Origination struct {
 							Text     string `xml:",chardata"`
-							Audience string `xml:"audience,attr"`
 							Label    string `xml:"label,attr"`
 							Corpname struct {
 								Text   string `xml:",chardata"`

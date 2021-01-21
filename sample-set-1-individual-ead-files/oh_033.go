@@ -70,9 +70,14 @@ type Ead struct {
 				Corpname string `xml:"corpname"`
 			} `xml:"repository"`
 			Unittitle   string `xml:"unittitle"`
-			Origination struct {
+			Origination []struct {
 				Text     string `xml:",chardata"`
 				Label    string `xml:"label,attr"`
+				Corpname struct {
+					Text   string `xml:",chardata"`
+					Source string `xml:"source,attr"`
+					Rules  string `xml:"rules,attr"`
+				} `xml:"corpname"`
 				Persname struct {
 					Text   string `xml:",chardata"`
 					Role   string `xml:"role,attr"`
@@ -287,7 +292,7 @@ type Ead struct {
 							Text   string `xml:",chardata"`
 							Source string `xml:"source,attr"`
 						} `xml:"subject"`
-						Corpname struct {
+						Corpname []struct {
 							Text   string `xml:",chardata"`
 							Source string `xml:"source,attr"`
 							Rules  string `xml:"rules,attr"`

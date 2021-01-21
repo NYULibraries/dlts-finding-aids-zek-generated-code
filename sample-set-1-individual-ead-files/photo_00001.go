@@ -2,7 +2,7 @@ type Ead struct {
 	XMLName        xml.Name `xml:"ead"`
 	Text           string   `xml:",chardata"`
 	Xmlns          string   `xml:"xmlns,attr"`
-	Ns2            string   `xml:"ns2,attr"`
+	Xlink          string   `xml:"xlink,attr"`
 	Xsi            string   `xml:"xsi,attr"`
 	SchemaLocation string   `xml:"schemaLocation,attr"`
 	Eadheader      struct {
@@ -31,9 +31,22 @@ type Ead struct {
 			Publicationstmt struct {
 				Text      string `xml:",chardata"`
 				Publisher string `xml:"publisher"`
-				Address   struct {
-					Text        string   `xml:",chardata"`
-					Addressline []string `xml:"addressline"`
+				P         struct {
+					Text string `xml:",chardata"`
+					Date string `xml:"date"`
+				} `xml:"p"`
+				Address struct {
+					Text        string `xml:",chardata"`
+					Addressline []struct {
+						Text   string `xml:",chardata"`
+						Extptr struct {
+							Text  string `xml:",chardata"`
+							Href  string `xml:"href,attr"`
+							Show  string `xml:"show,attr"`
+							Title string `xml:"title,attr"`
+							Type  string `xml:"type,attr"`
+						} `xml:"extptr"`
+					} `xml:"addressline"`
 				} `xml:"address"`
 			} `xml:"publicationstmt"`
 		} `xml:"filedesc"`
@@ -59,14 +72,7 @@ type Ead struct {
 		Text  string `xml:",chardata"`
 		Level string `xml:"level,attr"`
 		Did   struct {
-			Text         string `xml:",chardata"`
-			Langmaterial struct {
-				Text     string `xml:",chardata"`
-				Language struct {
-					Text     string `xml:",chardata"`
-					Langcode string `xml:"langcode,attr"`
-				} `xml:"language"`
-			} `xml:"langmaterial"`
+			Text       string `xml:",chardata"`
 			Repository struct {
 				Text     string `xml:",chardata"`
 				Corpname string `xml:"corpname"`
@@ -94,7 +100,75 @@ type Ead struct {
 				Normal string `xml:"normal,attr"`
 				Type   string `xml:"type,attr"`
 			} `xml:"unitdate"`
+			Abstract struct {
+				Text string `xml:",chardata"`
+				ID   string `xml:"id,attr"`
+			} `xml:"abstract"`
+			Langmaterial struct {
+				Text     string `xml:",chardata"`
+				Language struct {
+					Text     string `xml:",chardata"`
+					Langcode string `xml:"langcode,attr"`
+				} `xml:"language"`
+			} `xml:"langmaterial"`
 		} `xml:"did"`
+		Processinfo []struct {
+			Text string   `xml:",chardata"`
+			ID   string   `xml:"id,attr"`
+			Head string   `xml:"head"`
+			P    []string `xml:"p"`
+		} `xml:"processinfo"`
+		Arrangement struct {
+			Text string `xml:",chardata"`
+			ID   string `xml:"id,attr"`
+			Head string `xml:"head"`
+			P    string `xml:"p"`
+		} `xml:"arrangement"`
+		Custodhist struct {
+			Text string `xml:",chardata"`
+			ID   string `xml:"id,attr"`
+			Head string `xml:"head"`
+			P    string `xml:"p"`
+		} `xml:"custodhist"`
+		Accessrestrict struct {
+			Text string `xml:",chardata"`
+			ID   string `xml:"id,attr"`
+			Head string `xml:"head"`
+			P    string `xml:"p"`
+		} `xml:"accessrestrict"`
+		Userestrict struct {
+			Text string `xml:",chardata"`
+			ID   string `xml:"id,attr"`
+			Head string `xml:"head"`
+			P    string `xml:"p"`
+		} `xml:"userestrict"`
+		Prefercite struct {
+			Text string `xml:",chardata"`
+			ID   string `xml:"id,attr"`
+			Head string `xml:"head"`
+			P    struct {
+				Text string   `xml:",chardata"`
+				Lb   []string `xml:"lb"`
+			} `xml:"p"`
+		} `xml:"prefercite"`
+		Scopecontent struct {
+			Text string `xml:",chardata"`
+			ID   string `xml:"id,attr"`
+			Head string `xml:"head"`
+			P    string `xml:"p"`
+		} `xml:"scopecontent"`
+		Relatedmaterial struct {
+			Text string `xml:",chardata"`
+			ID   string `xml:"id,attr"`
+			Head string `xml:"head"`
+			P    string `xml:"p"`
+		} `xml:"relatedmaterial"`
+		Bioghist struct {
+			Text string   `xml:",chardata"`
+			ID   string   `xml:"id,attr"`
+			Head string   `xml:"head"`
+			P    []string `xml:"p"`
+		} `xml:"bioghist"`
 		Controlaccess struct {
 			Text     string `xml:",chardata"`
 			Geogname []struct {
@@ -117,9 +191,17 @@ type Ead struct {
 				ID    string `xml:"id,attr"`
 				Level string `xml:"level,attr"`
 				Did   struct {
-					Text      string `xml:",chardata"`
-					Unittitle string `xml:"unittitle"`
-					Unitdate  struct {
+					Text         string `xml:",chardata"`
+					Unittitle    string `xml:"unittitle"`
+					Langmaterial struct {
+						Text     string `xml:",chardata"`
+						Language struct {
+							Text       string `xml:",chardata"`
+							Langcode   string `xml:"langcode,attr"`
+							Scriptcode string `xml:"scriptcode,attr"`
+						} `xml:"language"`
+					} `xml:"langmaterial"`
+					Unitdate struct {
 						Text   string `xml:",chardata"`
 						Normal string `xml:"normal,attr"`
 						Type   string `xml:"type,attr"`
@@ -144,9 +226,17 @@ type Ead struct {
 					ID    string `xml:"id,attr"`
 					Level string `xml:"level,attr"`
 					Did   struct {
-						Text      string `xml:",chardata"`
-						Unittitle string `xml:"unittitle"`
-						Unitdate  struct {
+						Text         string `xml:",chardata"`
+						Unittitle    string `xml:"unittitle"`
+						Langmaterial struct {
+							Text     string `xml:",chardata"`
+							Language struct {
+								Text       string `xml:",chardata"`
+								Langcode   string `xml:"langcode,attr"`
+								Scriptcode string `xml:"scriptcode,attr"`
+							} `xml:"language"`
+						} `xml:"langmaterial"`
+						Unitdate struct {
 							Text   string `xml:",chardata"`
 							Normal string `xml:"normal,attr"`
 							Type   string `xml:"type,attr"`
@@ -159,9 +249,19 @@ type Ead struct {
 							Type      string `xml:"type,attr"`
 							Parent    string `xml:"parent,attr"`
 						} `xml:"container"`
+						Origination struct {
+							Text     string `xml:",chardata"`
+							Label    string `xml:"label,attr"`
+							Persname struct {
+								Text   string `xml:",chardata"`
+								Rules  string `xml:"rules,attr"`
+								Source string `xml:"source,attr"`
+							} `xml:"persname"`
+						} `xml:"origination"`
 						Physdesc struct {
-							Text string `xml:",chardata"`
-							ID   string `xml:"id,attr"`
+							Text  string `xml:",chardata"`
+							ID    string `xml:"id,attr"`
+							Label string `xml:"label,attr"`
 						} `xml:"physdesc"`
 						Unitid string `xml:"unitid"`
 					} `xml:"did"`
@@ -177,6 +277,14 @@ type Ead struct {
 								Normal string `xml:"normal,attr"`
 								Type   string `xml:"type,attr"`
 							} `xml:"unitdate"`
+							Langmaterial struct {
+								Text     string `xml:",chardata"`
+								Language struct {
+									Text       string `xml:",chardata"`
+									Langcode   string `xml:"langcode,attr"`
+									Scriptcode string `xml:"scriptcode,attr"`
+								} `xml:"language"`
+							} `xml:"langmaterial"`
 							Container []struct {
 								Text      string `xml:",chardata"`
 								Altrender string `xml:"altrender,attr"`
@@ -186,28 +294,44 @@ type Ead struct {
 								Parent    string `xml:"parent,attr"`
 							} `xml:"container"`
 							Physdesc []struct {
-								Text string `xml:",chardata"`
-								ID   string `xml:"id,attr"`
-								Emph struct {
+								Text  string `xml:",chardata"`
+								ID    string `xml:"id,attr"`
+								Label string `xml:"label,attr"`
+								Emph  struct {
 									Text   string `xml:",chardata"`
 									Render string `xml:"render,attr"`
 								} `xml:"emph"`
 							} `xml:"physdesc"`
-							Unitid      string `xml:"unitid"`
-							Origination struct {
+							Unitid string `xml:"unitid"`
+							Dao    []struct {
+								Text     string `xml:",chardata"`
+								Actuate  string `xml:"actuate,attr"`
+								Audience string `xml:"audience,attr"`
+								Href     string `xml:"href,attr"`
+								Role     string `xml:"role,attr"`
+								Show     string `xml:"show,attr"`
+								Title    string `xml:"title,attr"`
+								Type     string `xml:"type,attr"`
+								Daodesc  struct {
+									Text string `xml:",chardata"`
+									P    string `xml:"p"`
+								} `xml:"daodesc"`
+							} `xml:"dao"`
+							Origination []struct {
 								Text     string `xml:",chardata"`
 								Label    string `xml:"label,attr"`
-								Corpname struct {
-									Text   string `xml:",chardata"`
-									Source string `xml:"source,attr"`
-									Role   string `xml:"role,attr"`
-									Rules  string `xml:"rules,attr"`
-								} `xml:"corpname"`
 								Persname struct {
 									Text   string `xml:",chardata"`
 									Rules  string `xml:"rules,attr"`
 									Source string `xml:"source,attr"`
+									Role   string `xml:"role,attr"`
 								} `xml:"persname"`
+								Corpname struct {
+									Text   string `xml:",chardata"`
+									Source string `xml:"source,attr"`
+									Rules  string `xml:"rules,attr"`
+									Role   string `xml:"role,attr"`
+								} `xml:"corpname"`
 							} `xml:"origination"`
 						} `xml:"did"`
 						C []struct {
@@ -226,8 +350,17 @@ type Ead struct {
 								Physdesc []struct {
 									Text   string `xml:",chardata"`
 									ID     string `xml:"id,attr"`
+									Label  string `xml:"label,attr"`
 									Extent string `xml:"extent"`
 								} `xml:"physdesc"`
+								Langmaterial struct {
+									Text     string `xml:",chardata"`
+									Language struct {
+										Text       string `xml:",chardata"`
+										Langcode   string `xml:"langcode,attr"`
+										Scriptcode string `xml:"scriptcode,attr"`
+									} `xml:"language"`
+								} `xml:"langmaterial"`
 								Container []struct {
 									Text      string `xml:",chardata"`
 									Altrender string `xml:"altrender,attr"`
@@ -236,9 +369,28 @@ type Ead struct {
 									Type      string `xml:"type,attr"`
 									Parent    string `xml:"parent,attr"`
 								} `xml:"container"`
+								Dao []struct {
+									Text     string `xml:",chardata"`
+									Actuate  string `xml:"actuate,attr"`
+									Audience string `xml:"audience,attr"`
+									Href     string `xml:"href,attr"`
+									Role     string `xml:"role,attr"`
+									Show     string `xml:"show,attr"`
+									Title    string `xml:"title,attr"`
+									Type     string `xml:"type,attr"`
+									Daodesc  struct {
+										Text string `xml:",chardata"`
+										P    string `xml:"p"`
+									} `xml:"daodesc"`
+								} `xml:"dao"`
 								Origination struct {
 									Text     string `xml:",chardata"`
 									Label    string `xml:"label,attr"`
+									Persname struct {
+										Text   string `xml:",chardata"`
+										Rules  string `xml:"rules,attr"`
+										Source string `xml:"source,attr"`
+									} `xml:"persname"`
 									Corpname struct {
 										Text   string `xml:",chardata"`
 										Rules  string `xml:"rules,attr"`
@@ -246,19 +398,6 @@ type Ead struct {
 									} `xml:"corpname"`
 								} `xml:"origination"`
 							} `xml:"did"`
-							Dao []struct {
-								Text    string `xml:",chardata"`
-								Actuate string `xml:"actuate,attr"`
-								Href    string `xml:"href,attr"`
-								Role    string `xml:"role,attr"`
-								Show    string `xml:"show,attr"`
-								Title   string `xml:"title,attr"`
-								Type    string `xml:"type,attr"`
-								Daodesc struct {
-									Text string `xml:",chardata"`
-									P    string `xml:"p"`
-								} `xml:"daodesc"`
-							} `xml:"dao"`
 							Controlaccess struct {
 								Text     string `xml:",chardata"`
 								Geogname []struct {
@@ -294,9 +433,18 @@ type Ead struct {
 										Type   string `xml:"type,attr"`
 									} `xml:"unitdate"`
 									Physdesc struct {
-										Text string `xml:",chardata"`
-										ID   string `xml:"id,attr"`
+										Text  string `xml:",chardata"`
+										ID    string `xml:"id,attr"`
+										Label string `xml:"label,attr"`
 									} `xml:"physdesc"`
+									Langmaterial struct {
+										Text     string `xml:",chardata"`
+										Language struct {
+											Text       string `xml:",chardata"`
+											Langcode   string `xml:"langcode,attr"`
+											Scriptcode string `xml:"scriptcode,attr"`
+										} `xml:"language"`
+									} `xml:"langmaterial"`
 									Container []struct {
 										Text      string `xml:",chardata"`
 										Altrender string `xml:"altrender,attr"`
@@ -305,20 +453,35 @@ type Ead struct {
 										Type      string `xml:"type,attr"`
 										Parent    string `xml:"parent,attr"`
 									} `xml:"container"`
+									Dao []struct {
+										Text     string `xml:",chardata"`
+										Actuate  string `xml:"actuate,attr"`
+										Audience string `xml:"audience,attr"`
+										Href     string `xml:"href,attr"`
+										Role     string `xml:"role,attr"`
+										Show     string `xml:"show,attr"`
+										Title    string `xml:"title,attr"`
+										Type     string `xml:"type,attr"`
+										Daodesc  struct {
+											Text string `xml:",chardata"`
+											P    string `xml:"p"`
+										} `xml:"daodesc"`
+									} `xml:"dao"`
+									Origination struct {
+										Text     string `xml:",chardata"`
+										Label    string `xml:"label,attr"`
+										Corpname struct {
+											Text   string `xml:",chardata"`
+											Rules  string `xml:"rules,attr"`
+											Source string `xml:"source,attr"`
+										} `xml:"corpname"`
+										Persname struct {
+											Text   string `xml:",chardata"`
+											Rules  string `xml:"rules,attr"`
+											Source string `xml:"source,attr"`
+										} `xml:"persname"`
+									} `xml:"origination"`
 								} `xml:"did"`
-								Dao []struct {
-									Text    string `xml:",chardata"`
-									Actuate string `xml:"actuate,attr"`
-									Href    string `xml:"href,attr"`
-									Role    string `xml:"role,attr"`
-									Show    string `xml:"show,attr"`
-									Title   string `xml:"title,attr"`
-									Type    string `xml:"type,attr"`
-									Daodesc struct {
-										Text string `xml:",chardata"`
-										P    string `xml:"p"`
-									} `xml:"daodesc"`
-								} `xml:"dao"`
 								Controlaccess struct {
 									Text     string `xml:",chardata"`
 									Geogname struct {
@@ -358,8 +521,9 @@ type Ead struct {
 								Text   string `xml:",chardata"`
 								Source string `xml:"source,attr"`
 								Rules  string `xml:"rules,attr"`
+								Role   string `xml:"role,attr"`
 							} `xml:"persname"`
-							Corpname struct {
+							Corpname []struct {
 								Text   string `xml:",chardata"`
 								Source string `xml:"source,attr"`
 								Rules  string `xml:"rules,attr"`
@@ -371,19 +535,6 @@ type Ead struct {
 							Head string `xml:"head"`
 							P    string `xml:"p"`
 						} `xml:"odd"`
-						Dao []struct {
-							Text    string `xml:",chardata"`
-							Actuate string `xml:"actuate,attr"`
-							Href    string `xml:"href,attr"`
-							Role    string `xml:"role,attr"`
-							Show    string `xml:"show,attr"`
-							Title   string `xml:"title,attr"`
-							Type    string `xml:"type,attr"`
-							Daodesc struct {
-								Text string `xml:",chardata"`
-								P    string `xml:"p"`
-							} `xml:"daodesc"`
-						} `xml:"dao"`
 						Userestrict struct {
 							Text string `xml:",chardata"`
 							ID   string `xml:"id,attr"`
