@@ -272,8 +272,8 @@ type Ead struct {
 			} `xml:"persname"`
 			Corpname []struct {
 				Text   string `xml:",chardata"`
-				Rules  string `xml:"rules,attr"`
 				Source string `xml:"source,attr"`
+				Rules  string `xml:"rules,attr"`
 				Role   string `xml:"role,attr"`
 			} `xml:"corpname"`
 		} `xml:"controlaccess"`
@@ -338,6 +338,13 @@ type Ead struct {
 							Corpname string `xml:"corpname"`
 						} `xml:"indexentry"`
 					} `xml:"index"`
+					Controlaccess struct {
+						Text     string `xml:",chardata"`
+						Persname struct {
+							Text   string `xml:",chardata"`
+							Source string `xml:"source,attr"`
+						} `xml:"persname"`
+					} `xml:"controlaccess"`
 					Processinfo struct {
 						Text string `xml:",chardata"`
 						ID   string `xml:"id,attr"`
