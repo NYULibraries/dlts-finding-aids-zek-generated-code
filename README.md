@@ -1,7 +1,7 @@
 # NYU DLTS Finding Aids Zek Generated Code - ARCHIVED
 
 This is an archive of the `zek` files used for analysis of EAD files during the initial development phases of the Finding Aids Redesign project.
-Analysis is not being done using the EAD element extractor and union analyzer.
+Analysis is now being done using [nyudlts / dlts\-finding\-aids\-ead\-element\-extractor](https://github.com/nyudlts/dlts-finding-aids-ead-element-extractor).
 
 -----
 
